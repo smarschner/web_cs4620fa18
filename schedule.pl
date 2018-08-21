@@ -251,9 +251,10 @@ my $prevmm, my $prevmd; # previous date of an actual meeting.
 
 
 while ($month < $cfg{'end_month'} || $day < $cfg{'end_day'}) {
+	#printf STDERR "month $month day $day wi $wi ni $ni\n", $cr;
     &insert_exams($prevm, $prevd, $month, $day);
     my $holiday = &check_holiday($month, $day);
-    my $odd_week = ($ni % 6 == 0 || $ni % 6 == 1 || $ni % 6 == 5);  # TODO needs to be adjusted depending on calendar
+    my $odd_week = ($ni % 6 == 1 || $ni % 6 == 2 || $ni % 6 == 3);  # TODO needs to be adjusted depending on calendar
     if ($holiday ne '') {
 	if ($odd_week) {
 	    print '<tr class="dis odd">', $cr;

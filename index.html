@@ -42,7 +42,7 @@
             <li><a href="#books">Books</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="https://piazza.com/cornell/spring2018/cs46205620/home">Piazza</a></li>
+              <li><a href="https://piazza.com/cornell/fall2018/cs46205620/home">Piazza</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -50,30 +50,33 @@
 
     <div class="container" id="main">
 
-      <h1 id="head1">CS4620 <span class=subtitle>Introduction to Computer Graphics</span></h1>
-      <h1 id="head2"><a href="cs4621/">CS4621 <span class=subtitle>Computer Graphics Practicum</span></a></h1>
+      <h1 id="head1">CS4620 <span class=subtitle>(5620) Introduction to Computer Graphics</span></h1>
+      <h1 id="head2"><!-- <a href="cs4621/"> -->CS4621 <span class=subtitle>(5621) Computer Graphics Practicum</span><!-- </a> --></h1>
       <p class="courseinfo">Cornell University</p>
-      <p class="courseinfo">MWF 2:30pm, Phillips 101</p>
-      <p class="courseinfo">F 3:35pm, Phillips 101 [4621 only]</p>
-      <p class="courseinfo">Instructor: <a href="/~srm">Steve Marschner</a> (office hours TBA; see <a href="#officehours">calendar</a> for exceptions)</p>
+      <p class="courseinfo">MWF 1:25pm, Gates G01</p>
+      <p class="courseinfo">M 12:20pm, Hollister B14 [4621 only]</p>
+      <p class="courseinfo">Instructor: <a href="/~srm">Steve Marschner</a> (office hours TBA) 
+        <!-- ; see <a href="#officehours">calendar</a> for exceptions)</p> -->
 
 
       <h2 id="staff">Staff</h2>
       <h3>Graduate TAs</h3>
       <p class="staff">
-         Mandy Xia (CS4620 head TA, mx83@cornell.edu) <br>
-         Eston Schweickart (CS4621 head TA, ers@cs.cornell.edu) <br>
-         Zechen Zhang (zz335@cornell.edu) <br>
-         Shiyu Wang (sw673@cornell.edu) <br>
+         Zekun Hao (CS4620 head TA) <br>
+         Rundong Wu (CS4621 head TA) <br>
+         Zechen Zhang <br>
+         Gregory Yauney <br>
+         Tomasz Chmielewski <br>
       </p>
 
       <h3>Ugrad TAs</h3>
       <p class="staff">
-          Sandy Fang (sf373@cornell.edu) <br>
-          Serge-Olivier Amega (sa837@cornell.edu) <br>
-          Brandon Walker (bcw58@cornell.edu) <br>
-          Yiteng Guo (yg229@cornell.edu) <br>
-          Joel Hoover (jah552@cornell.edu) <br>
+          Jason Liu <!-- (jl2732@cornell.edu) --> <br>
+          Sandy Fang <!-- (sf373@cornell.edu) --> <br>
+          Serge-Olivier Amega <!-- (sa837@cornell.edu) --> <br>
+          Meredith Young-Ng <!-- (mjy35@cornell.edu) --> <br>
+          Lily Lin <!-- (xl637@cornell.edu) --> <br>
+          Sitian Chen <!-- (sc2294@cornell.edu) --> <br>
       </p>
 
       <p class="staff">See <a href="#officehours">below</a> for the office hours calendar.</p>
@@ -90,7 +93,7 @@
 
       <p>There will be 7 projects and 7 homeworks during the semester.</p>
 
-      <p>The CS4620 late policy is outlined in <a href="slides/02trimesh1.pdf">lecture 2</a>.  Briefly, you have 7 slip days that you can use to turn assignments in late; turn one assignment in 7 days late or turn 7 assignments in one day late.  After you run out of slip days there are late penalties, and assignments can't ever be turned in more than 7 days late.
+      <p>The CS4620 late policy is outlined in <a href="slides/02trimesh1.pdf">lecture 2</a>.  Briefly, you have 7 slip days that you can use to turn assignments in late: turn one assignment in 7 days late or turn 7 assignments in one day late.  After you run out of slip days there are late penalties, and assignments can't ever be turned in more than 7 days late.
 
       <div id="projects_content"></div>
 
@@ -99,7 +102,7 @@
 
       <p>There will be an evening midterm and a final exam:</p>
       <ul>
-        <li> Midterm: (TBA)
+        <li> Midterm: October 23, 7:30pm
         <li> Final: (not yet scheduled)
       </ul>
 
@@ -219,7 +222,7 @@ has changed from year to year.
       course, CS4621/5621, you will get a more in-depth exposure 
       to the course material and complete an additional project.
       Students taking the practicum will also be required to 
-      attend lectures most weeks during the Friday meeting time for 
+      attend lectures most weeks during the Monday meeting time for 
       CS4621/5621.
 
       <p><strong>Academic integrity:</strong> We assume the work
@@ -257,11 +260,9 @@ has changed from year to year.
       or another team's program code, and certainly never OK to copy 
       parts of one person's or team's writeup, code, or results into 
       another's, even if the general solution was worked out together.
-      <strong>The paper and pencil parts of the projects can be 
-      discussed in general terms, but must be worked on alone.</strong>
 
       <div id="officehours">
-          <iframe src="https://calendar.google.com/calendar/embed?src=cornell.edu_uc96qm4rfmpmn2kcfatlcbr1u8%40group.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+         <!--  <iframe src="https://calendar.google.com/calendar/embed?src=cornell.edu_uc96qm4rfmpmn2kcfatlcbr1u8%40group.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
       </div>
 
 
@@ -328,14 +329,13 @@ has changed from year to year.
     window.onload = function () {
       $('#schedule_content').load('schedule.html');
       projects = [
-        { tag: 'mesh', name: 'Mesh', text: 'Not yet released...', src: 'a1mesh.html' },
-        { tag: 'ray1', name: 'Ray 1', text: 'Not yet released...', src: 'a2ray1.html' },
-        { tag: 'scene', name: 'Scene', text: 'Not yet released...', src: 'a3Scene.html'},
-        { tag: 'shaders', name: 'Shaders', text: 'Not yet released...', src: 'a4shader.html' },
-        { tag: 'splines', name: 'Splines', text: 'Not yet released...', src: 'a5splines.html' },
-        { tag: 'animation', name: 'Animation', text: 'Not yet released...', src: 'a6animation.html' },
-        { tag: 'ray2', name: 'Ray 2', text: 'Not yet released...', src: 'a7ray2.html' },
-        // { tag: 'ray2', name: 'Ray 2', text: 'Not yet released...', src: '' },
+        { tag: 'mesh', name: 'Mesh', text: 'Not yet released...', src: '' },
+        { tag: 'ray1', name: 'Ray 1', text: 'Not yet released...', src: '' },
+        { tag: 'scene', name: 'Scene', text: 'Not yet released...', src: ''},
+        { tag: 'shaders', name: 'Shaders', text: 'Not yet released...', src: '' },
+        { tag: 'splines', name: 'Splines', text: 'Not yet released...', src: '' },
+        { tag: 'animation', name: 'Animation', text: 'Not yet released...', src: '' },
+        { tag: 'ray2', name: 'Ray 2', text: 'Not yet released...', src: '' },
       ]
       projects.map(function (proj) {
         $('#projects_content').append($(' \
