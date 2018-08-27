@@ -64,9 +64,10 @@ if (!gl) {
 
 <script>
     var canvas = document.getElementById("webglCanvas")
-    var gl = canvas.getContext("experimental-webgl");
+    var gl = canvas.getContext("webgl");
     if (!gl) {
-        gl = canvas.getContext("webgl");
+        // Might work on some older browsers
+        gl = canvas.getContext("experimental-webgl");
         if (!gl) {
             alert("Cannot get WebGL context!");
         }

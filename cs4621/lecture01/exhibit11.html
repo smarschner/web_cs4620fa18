@@ -75,9 +75,9 @@
         // Getting WebGL context the right way
         var gl = null;
         try {
-            gl = canvas[0].getContext("experimental-webgl");
+            gl = canvas[0].getContext("webgl");
             if (!gl) {
-                gl = canvas[0].getContext("webgl");
+                gl = canvas[0].getContext("experimental-webgl");
             }
         } catch (error) {
             // NO-OP
