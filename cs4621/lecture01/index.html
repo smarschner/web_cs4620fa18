@@ -309,8 +309,8 @@
                         </ul>
                         This is what we mean by "vertex connectivity."
                     </li>
-                    <li><b>Rasterization</b> = the process of turning vertex+primitive data small pieces, each of size equal to a pixel.</li>
-                    <li><b>Fragment</b> = a potential pixel, resulted from rasterization.</li>
+                    <li><b>Rasterization</b> = the process of turning vertex+primitive data into small pieces, one for each pixel covered by the primitive.</li>
+                    <li><b>Fragment</b> = a potential pixel, resulting from rasterization.  Each fragment "lives at" a particular pixel.</li>
                     <li><b>Raster operations</b> = processing fragments+framebuffer to decide what gets written to the framebuffer</li>
                     <ul>
                         <li>Depth test</li>
@@ -318,12 +318,12 @@
                         <li>Stencil test</li>
                         <li>etc.</li>
                     </ul>
-                    <li>A <b>vertex shader</b> transform vertices into <b><i>clip space</i></b>.
+                    <li>A <b>vertex shader</b> transforms vertices into <b><i>clip space</i></b>.
                         <ul>
                             <li>We will learn about clip space later in CS 4620.</li>
                         </ul>
                     </li>
-                    <li>A <b>fragment shader</b> process info about fragments and <b><i>output a color</i></b>
+                    <li>A <b>fragment shader</b> processes info about fragments and <b><i>output a color</i></b>
                         or decide to <b><i>discard the fragment</i></b>.</li>
                     <li>A <b>"program"</b> is a collection of shaders.  In WebGL, you must have a
                         vertex shader and a fragment shader.</li>
