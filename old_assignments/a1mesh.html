@@ -1,5 +1,5 @@
 <!-- <h1><strong>PA 1: Meshes</strong></h1> -->
-<h3><strong>Due: Wednesday September 5 2018 (11:59pm)</strong></h3>
+<h3><strong>Due: Friday February 2th 2018 (11:59pm)</strong></h3>
 <p>This particular assignment only has a programming exercise, and no written exercise.</p>
 
 <p><strong>Do this project alone or in groups of two, as you prefer.</strong><!--  You can use <a href="https://piazza.com/class/iy7ekv7ao0r1aj">Piazza</a> to help pair yourselves up. -->
@@ -232,7 +232,7 @@ i.e., collapses into a line; these degenerate triangles should be omitted.
 <h4>Framework</h4>
 
 <p>We have provided a framework to help you get stared.
-The framework is available on a public <a href="https://github.com/smarschner/frameworks_cs4620fa18">Git repository</a>.
+The framework is available on a public <a href="https://github.com/smarschner/cs4620-18sp-frameworks">Git repository</a>.
 If you have not used Git before, you can follow the tutorial <a href=https://git-scm.com/docs/gittutorial>
 here</a>, or ask a TA for assistance. We encourage you to use version control though
 <strong>we request that you refrain from publicly sharing your class repository.</strong>
@@ -386,50 +386,6 @@ neighboring faces.
 <p>
 If you implement any of the above options, please provide sample input and/or output with your submission
 that demonstrates that your code is functioning correctly.
-</p>
-
-<h4>Command-line argument in Java</h4>
-The command-line utility <tt>MeshGen</tt> is supposed to handle the command-line argument as a combination of options and parameters. If you've never used command-line arguments in Java, take a look at this brief 
-<a href="https://docs.oracle.com/javase/tutorial/essential/environment/cmdLineArgs.html">documentation</a> first.</p>
-
-<p>
-The command-line arguments are stored as array of strings <tt>String[] args</tt> in the <tt>main</tt> function. If the input arguments are 
-<pre class="prettyprint">
-  -g sphere -n 32 -m 64 -o outfile.obj
-</pre>
-then
-<pre class="prettyprint">
-  args = {"-g", "sphere", "-n", "32", "-m", "64", "-o", "outfile.obj"};
-</pre>
-
-A simple example parsing the command-line arguments above.
-<pre class="prettyprint">
-class MeshGen 
-{
-  public static void main(String[] args) {
-
-    if (args[0].equals("-g")) {
-      // generate mesh if the first option is "-g"
-
-      for (int i=0; i < args.length; i += 2) 
-      {
-        if (args[i].equals("-g"))
-        {
-          // parse whether it is sphere or cylinder from args[i+1]
-        }
-        else if (args[i].equals("-n"))
-        {
-          // parse latitude divisions from args[i+1]
-          // use Integer.parseInt() for parsing integer parameter
-        } else if (...)
-        {
-          // similar operations for other options and parameters
-        }
-      }
-    }
-  }
-}
-</pre>
 </p>
 
 <h4>Handing in</h4>
