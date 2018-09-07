@@ -1,0 +1,54 @@
+<!-- <h1><strong>PA 2: Ray1</strong></h1> -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<h3><strong>Due: Wednesday September 12th 2018 (11:59pm)</strong></h3>
+
+<p><strong>Do this project alone or in groups of two, as you prefer. </strong>You can use <a href="https://piazza.com/class/jd0ealxkqom6s8">Piazza</a> to help pair yourselves up.
+
+    <h3>Written Part</h3>
+    <!-- <hr/> -->
+    <h4>Q1.</h4> A group of astronauts has just left on their journey to Mars when ground control informs them that there will be a lunar eclipse back home.  The astronauts are asked to take a picture of this rare event from their location in space and report back.  The situation at the moment they take the picture is as follows:
+
+        <p>Note that we use Earth-centered coordinates that match the ones for the sphere in the mesh assignment.  So 1 Earth radius is the unit of measure.
+        <ul>
+            <li>The sun is positioned 23,679 units away from the Earth (from the center, if you must ask), exactly above the point at latitude and longitude zero, at (0, 0, 23679).
+            <li>The moon is positioned at (0, 1, -10) units away from the center of the earth.  It has radius 0.15.
+            <li>The spacecraft is at (15, 0, 20) and its camera is looking in the direction (-3/5, 0, -4/5) (which is the ray through the very center of the image)
+        </ul>
+
+        <h5>1). Ray Intersection and Shadow Ray</h5>
+
+        <ol type="a">
+            <li>In the astronauts' photo, what (x, y, z) point on the Earth's surface appears exactly at the center of the image? Check your work by showing that the point is both on the ray and on the surface of the Earth (plug the point into the ray and sphere equations). See Sec. 4.4.1 of the textbook.
+            <li>Is the point (0, .91, -9.88) on the moon in the shadow of the Earth? You can approximate the direction from the point to the sun as (0, 0, 1).
+        </ol>
+
+        <h5>2). Lambertian Reflectance</h5>
+
+            <ol type="a">
+                <li>Let's assume for this question that colors only have one component (reflectance) instead of three RGB components. Let the point on the Earth at the center of the image be P (calculated above). If the intensity of the sun is 100,000,000 units and we assume only diffuse reflectance from the Earth, with diffuse reflectance R = 0.5 at P. What is the light reflected from P toward the camera? Again, you can approximate the light direction as (0, 0, 1).
+            </ol>
+
+            <h4>Q2. </h4>
+            <h5> Normal Interpolation</h5>
+            <p>
+            Suppose we are approximating a sphere by a regular tetrahedron of edge length 2, centered at the origin. (Of course this is a pretty coarse approximation to a sphere, but it keeps the numbers simple.)  The coordinates of the 4 vertices are A \((0,-1,1/\sqrt{2})\), B \((1,0,-1/\sqrt{2})\), C \((-1, 0, -1/\sqrt{2})\), D \((0, 1, 1/\sqrt{2})\).  Since the mesh is meant to approximate a sphere, the vertex normals all point directly away from the origin.  Linear (barycentric) interpolation (See textbook sec 2.7) of vertex normals is used for shading.</p>
+            <p>
+            Suppose we are shading a ray that hit at the point E be on face ABD.  If the (un-normalized) interpolated normal at E is 
+            \((\frac{\sqrt{6}}{18}, \; \frac{\sqrt{2}}{2}, \; \frac{2}{3})\)
+            what is the ratio of the distance from E to edge AB, edge DA and edge BD, what are the barycentric coordinates of E in triangle ABD, and what is the 3D position of E?</p>
+
+    <h3>Programming Part</h3>
+    <p>Coming soon...
+
+<h4>What to Submit</h4>
+<p>Submit your solution of the written part individually on CMS, which should includes a PDF file for Q1 and Q2 together.
+<p>As for the code part, submit a zip file containing your solution organized the same way as the code on Github, along with any additional files.
+Include a readme in your zip that contains:
+<ul>
+  <li>You and your partner's names and NetIDs.
+  <li>Any problems with your solution.
+  <li>Anything else you want us to know.
+</ul>
+<p><strong><a href=https://cms.csuglab.cornell.edu>Upload here (CMS)</a></strong>
