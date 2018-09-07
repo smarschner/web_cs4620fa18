@@ -32,8 +32,8 @@
 <body>
 <div class="container">
     <h1>CS 4621 PPA1 <span class="subtitle">WebGL Ray</span></h1>
-    <p class="courseinfo">Out: Friday February 9, 2018</p>
-    <p class="courseinfo">Due: Friday February 23, 2018 at 11:59pm</p>
+    <p class="courseinfo">Out: Friday September 7, 2018</p>
+    <p class="courseinfo">Due: Friday September 21, 2018 at 11:59pm</p>
     <p class="courseinfo">Work in groups of up to 4. You can group up on <a href="https://piazza.com/class/jdghdojrfsa3wy">Piazza</a>.</p>
 
     <h2>Overview</h2>
@@ -288,7 +288,7 @@ for(int i=0; i&lt;MAX_TRIANGLES; i++) {
             Array access in the fragment shader is limited.  You can only index an array with an expression
             made up of loop counters and constants.  In other words, if we were to store vertex positions in
             a uniform array, the following would be okay:
-<pre class="prettyprint">uniform vec3 vertexPositions;
+<pre class="prettyprint">uniform vec3 vertexPositions[MAX_VERTICES];
 
 vec3 p = vertexPosition[0];
 
@@ -301,10 +301,10 @@ for(int i=0; i&lt;MAX_TRIANGLES; i++) {
 }
 </pre>
             But, this is not:
-<pre class="prettyprint">uniform vec3 vertexPositions;
+<pre class="prettyprint">uniform vec3 vertexPositions[MAX_VERTICES];
 uniform int vertexIndex;
 
-vec3 p = vertexPositions[p];
+vec3 p = vertexPositions[vertexIndex];
 </pre>
             This is why we are storing the vertex positions and triangle colors in textures; any
             piece of a texture can be accessed by any pixel. This way, you can loop over all triangles
