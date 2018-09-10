@@ -272,8 +272,8 @@ void main() {
         var program = createGlslProgram(gl, vertexShaderName, fragmentShaderName);
 
         var vertexData = [
-            -1.0, -1.0, 0.0,  // Lower left
-            0.0,  0.0,
+            -1.0, -1.0, 0.0,  // Lower left, vert_position
+            0.0,  0.0,        // vert_texCoord
             1.0, -1.0, 0.0,  // Lower right
             1.0,  0.0,
             1.0,  1.0, 0.0,  // Top right

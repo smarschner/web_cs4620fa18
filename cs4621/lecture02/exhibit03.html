@@ -187,21 +187,27 @@ gl.uniform1fv(sizeLocation, sizes);
     var gl = initializeWebGL("webglCanvas");
     var program = createGlslProgram(gl, "vertexShader", "fragmentShader");
 
+    // number of circles to be drawn
     var shapeCount = 16;
+    // number of corners on each circle
     var cornerCount = 16;
 
     var vertexData = [];
     for (var i = 0; i < shapeCount; i++) {
+        // center of the circle
         vertexData.push(0.0);
         vertexData.push(0.0);
+        // shape index
         vertexData.push(i*1.0);
 
         for (var j = 0; j < cornerCount; j++) {
             var theta = 2*Math.PI*j/cornerCount;
             var x = Math.cos(theta);
             var y = Math.sin(theta);
+            // corner points on the circle
             vertexData.push(x);
             vertexData.push(y);
+            // shape index
             vertexData.push(i*1.0);
         }
     }
@@ -211,6 +217,7 @@ gl.uniform1fv(sizeLocation, sizes);
     gl.bufferData(gl.ARRAY_BUFFER, vertexArray, gl.STATIC_DRAW);
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
+    // indices for triangle vertices
     var indexData = [];
     for (var i = 0; i < shapeCount; i++) {
         var start = i*(cornerCount+1);
@@ -231,6 +238,7 @@ gl.uniform1fv(sizeLocation, sizes);
     var centerY = [];
     var velocityX = [];
     var velocityY = [];
+    // initialize the sizes, positions and velocities randomly for the circles
     for(var i=0; i<shapeCount; i++) {
         sizes.push(0.01 + Math.random()*0.09);
         centerX.push((-1.0 + sizes[i]) + (2.0 - 2.0*sizes[i])*Math.random());
@@ -281,10 +289,12 @@ gl.uniform1fv(sizeLocation, sizes);
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
         var positionLocation = gl.getAttribLocation(program, "position");
         gl.enableVertexAttribArray(positionLocation);
+        // using the positions in the vertex buffer, note the size, stride, and offset argument        
         gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 4*3, 0);
         var shapeIndexLocation = gl.getAttribLocation(program, "shapeIndex");
         gl.enableVertexAttribArray(shapeIndexLocation);
-        gl.vertexAttribPointer(shapeIndexLocation, 1, gl.FLOAT, false, 4*3, 4*2);
+        // using the shape indices in the vertex buffer, note the size, stride, and offset argument        
+        gl.vertexAttribPointer(shapeIndexLocation, 1, gl.FLOAT, false, 4*3, 4*2); 
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
