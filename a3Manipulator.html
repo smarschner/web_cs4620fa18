@@ -52,16 +52,23 @@ Just to recall some terminology: each of these projection transformations (repre
         <li> transform the point from (ii) back into eye space and confirm it lands in the same place where it started.</li>
     </ol>
 
+
+</li>
+<br>
+<li>
+    In NDC space, the eight corners of the canonical view volume are c_lbf, c_rbf, ..., c_rtn =  (+/- 1, +/- 1, +/- 1).  The view volume in eye space consists of all the points that map into the canonical view volume under the projection transformation.
 <br><br>
-In NDC space, the eight corners of the canonical view volume are c_lbf, c_rbf, ..., c_rtn =  (+/- 1, +/- 1, +/- 1).  The view volume in eye space consists of all the points that map into the canonical view volume under the projection transformation.
+    Compute three of the eight 3D points that are the corners of the eye-space view volumes for the perspective and orthographic cases. Use the corners c_rtn = (1,1,1), c_rbn = (1,-1,1), c_rtf = (1,1,-1). Verify that the 3D points you found transform back to the corners of the clip-space view volume.  Your answer will be in terms of the view parameters l, r, b, t, n, f.
+
 </li>
-<li> Compute the eight 3D points that are the corners of the eye-space view volumes for the perspective and orthographic cases.  Verify that the 3D points you found transform back to the corners of the clip-space view volume.  Your answer will be in terms of the view parameters l, r, b, t, n, f.
+<br>
+<li>
+    In homogeneous coordinates, the plane {(x, y, z) | ax + by + cz +d = 0} can be written compactly using the 4D vectors p = (x,y,z,1) and q = (a,b,c,d); then the plane equation is {p | p dot q = 0}.  Just as the 4D vector describing a 3D point is only unique up to a scale factor, the 4D vector describing a plane is only unique up to a scale factor.
 <br><br>
-In homogeneous coordinates, the plane {(x, y, z) | ax + by + cz +d = 0} can be written compactly using the 4D vectors p = (x,y,z,1) and q = (a,b,c,d); then the plane equation is {p | p dot q = 0}.  Just as the 4D vector describing a 3D point is only unique up to a scale factor, the 4D vector describing a plane is only unique up to a scale factor.
+    Write the 4D vectors corresponding to the six planes P_l, P_r, P_b, P_t, P_f, P_n that contain the left, right, bottom, top, far, and near faces of the canonical view volume, in NDC.
 </li>
-<li> Write the 4D vectors corresponding to the six planes P_l, P_r, P_b, P_t, P_f, P_n that contain the left, right, bottom, top, far, and near faces of the canonical view volume, in NDC.
-</li>
-<li> Find the 4D vectors of the 6 planes that bound each of the two eye-space view volumes.  Verify that for each volume, each of the 8 corners is indeed on each of the 3 planes it should be, and that for the perspective volume, the left, right, bottom, and top planes all also contain the origin (aka. the eye position).
+<br>
+<li> Find the 4D vectors of the 6 planes that bound each of the two eye-space view volumes. Verify that for each volume, each of the 3 corners from (c.) is indeed on each of the 3 planes it should be, and that for the perspective volume, the left, right, bottom, and top planes all also contain the origin (aka. the eye position).
 </li>
 </ol>
 <h4>Q3. Manipulator Warmup</h4>
@@ -106,7 +113,7 @@ What are the coordinates of the two points in question?
 <!-- <hr/> -->
 
 <h3>Programming Part</h3>
-<h3><strong>Due:  Friday October 5th 2018 (11:59pm)</strong></h3>
+<h3><strong>Due:  Wednesday October 10th 2018 (11:59pm)</strong></h3>
 
 <p> For the programming part of this assignment, you will implement a 3D user interface of a type commonly provided in 3D modeling tools, which we call manipulators.  A 3D UI element is one that appears in a 3D scene, and like 2D UI elements such as scroll bars and sliders, it responds to a user's mouse input to adjust a property of the scene the user wants to control.  In particular, manipulators are 3D UI elements that are used to edit the transformations that position objects in a scene.</p>
 
