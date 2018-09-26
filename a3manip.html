@@ -5,7 +5,7 @@
  <p><strong>Do this project alone or in groups of two, as you prefer. </strong>You can use <a href="https://piazza.com/class/jd0ealxkqom6s8">Piazza</a> to help pair yourselves up.
      <h3>Written Part</h3>
     <h3><strong>Due: Friday September 28th 2018 (11:59pm)</strong></h3>
-    <p>Note: You should feel free to use a symbolic algebra package, such as <a href="http://www.wolframalpha.com/examples/mathematics/linear-algebra/">Wolfram Alpha</a>, and/or numerical math tools like a scientific calculator or Matlab/NumPy/Julia etc. to help with these problems.
+    <p>Note: You should feel free to use a symbolic algebra package, such as <a href="http://www.wolframalpha.com/examples/mathematics/linear-algebra/">Wolfram Alpha</a> (easiest to get started with, not so easy to automate), <a href="https://sandbox.open.wolframcloud.com">Wolfram Cloud</a> (access to the underlying language for Alpha, offered in freemium model), or <a href="https://live.sympy.org">SymPy</a> (open source system with many of the capabilities of Wolfram Cloud), and/or numerical math tools like a scientific calculator or Matlab/NumPy/Julia etc., to help with these problems.
 </p>
     <!-- <hr/> -->
      <h4>Q1. Transformation matrices</h4>
@@ -40,7 +40,7 @@
 </ol>
 <p>In NDC space, the eight corners of the canonical view volume are \(c_\text{lbf}, c_\text{rbf}, \ldots, c_\text{rtn} = (\pm 1, \pm 1, \pm 1)\).  The view volume in eye space consists of all the points that map into the canonical view volume under the projection transformation.</p>
 <ol type="a" start=3>
-<li>Use the inverse projection matrices to compute the eight 3D points that are the corners of the eye-space view volumes for the perspective and orthographic cases. Your answer will be in terms of the view parameters \(l\), \(r\), \(b\), \(t\), \(n\), and \(f\).  Spot check by verifying that three of the 3D points you found for each volume transform to the correct corners of the canonical view volume.  
+<li>Use the inverse projection matrices to compute the eight 3D points that are the corners of the eye-space view volumes for the perspective and orthographic cases. Your answer will be in terms of the view parameters \(l\), \(r\), \(b\), \(t\), \(n\), and \(f\).  Check your answer by verifying that the 3D corner points you found for each volume transform to the correct corners of the canonical view volume.  [If you have not managed to automate the computations, just hand in 3 of the 8 corners for each case, 2 on the near plane and 1 on the far plane.]
 </li>
 </ol>
 <p>In homogeneous coordinates, in which the 3D point 
@@ -49,8 +49,8 @@
 <ol type="a" start=4>
 <li> Write the 4D vectors corresponding to the six planes \(P_l, P_r, P_b, P_t, P_f, P_n\) that contain the left, right, bottom, top, far, and near faces of the canonical view volume, in NDC.
 </li>
-<li> Find the 4D vectors of the 6 planes that bound the eye-space perspective view volume.  You can do this by inspection, from the corners of the view volume that you worked out earlier, or if you want a niftier way, by transforming the six planes from the previous part through the inverse projection matrix (planes in homogeneous coordinates transform in exactly the same way as normal vectors do in ordinary 3D transformations).
-<li>Verify that each of the 8 corners of the volume is indeed on each of the 3 planes it should be, and that the left, right, bottom, and top planes all also contain the origin (aka. the eye position).  (If you want, see if you can do this part using a single matrix multiplication.)
+<li> Find the 4D vectors of the 6 planes that bound the eye-space perspective view volume.  You can do this by inspection, from the corners of the view volume that you worked out earlier, or if you want a niftier way, by transforming the six planes from the previous part through the inverse projection matrix (planes in homogeneous coordinates transform in exactly the same way as normal vectors do in ordinary 3D transformations).  Remember these vectors are only defined up to a scale factor, so you may like to scale them to the neatest, simplest, most understandable form.  [If you have not managed to automate the computations, only hand in the front, left, and top planes.]
+<li>Verify that each of the 8 corners of the volume is indeed on each of the 3 planes it should be, and that the left, right, bottom, and top planes all also contain the origin (aka. the eye position).  If you want, see if you can do this part using a single matrix multiplication.  [If you have not managed to automate the computations, only hand in the checks for the front, left, and top planes and three corner points of your choice.]
 </li>
 </ol>
 <h4>Q3. Manipulator Warmup</h4>
