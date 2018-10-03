@@ -1,0 +1,84 @@
+<!-- <h1><strong>PA 3: Scene</strong></h1> -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+ 
+</script>
+
+<p><strong>Do this project alone or in groups of two, as you prefer. </strong>You can use <a href="https://piazza.com/class/jd0ealxkqom6s8">Piazza</a> to help pair yourselves up.
+
+    <h3>Written Part</h3>
+    <h3><strong>Due: Wednesday October 10th 2018 (11:59pm)</strong></h3>
+    <!-- <hr/> -->
+
+    <h4>1. Displacement Mapping</h4>
+
+    <p>Displacement mapping involves computing new normals for the displaced surface, and the standard approach (which we use in the programming part) involves an approximation.  This problem explores when this approximation is accurate, looking at a 2D analog where the math is simpler to write down.</p>
+
+    <p>Suppose we have a 2D curve defined by a function:</p>
+    
+    \[p: [0,1] \rightarrow R^2\]
+
+    <p>and a displacement function defined:</p>
+
+    \[h: [0,1] \rightarrow R\]
+
+    <p>The (unnormalized) tangent vector to this curve is its derivative with respect to \(u\):</p>
+
+    \[t(u) = p'(u)\]
+
+    <p>and the (unnormalized) normal vector is:</p>
+
+    \[n(u) = R \: t(u)\]
+
+    <p>where R is a rotation by 90 degrees clockwise (this obeys the convention that "inside" is to the left as you walk along the curve, and the normal points towards the outside).</p>
+    
+    <p>The unit tangent is:</p>
+
+    \[\hat{t}(u) = \frac{t(u)}{\lVert t(u)\rVert}\]
+
+    <p>and the unit normal is: </p>
+
+    \[\hat{n}(u) = \frac{n(u)}{\lVert n(u) \rVert} = \frac{n(u)}{\lVert t(u) \rVert}\]
+
+
+    <p>We define a curve that is "p displaced along the normal by h" which is:</p>
+
+    \[p_d(u) = p(u) + h(u) \hat{n}(u)\]
+
+    <p>The (unnormalized) tangent vector to this curve is:</p>
+
+    \[p'_d(u) = p'(u) + h'(u) \hat{n}(u) + h(u) \hat{n}'(u)\]
+
+    <p>This last term is commonly discarded in practice, on the argument that we are usually applying small displacements to smooth curves, so \(h\) is small and \(\hat{n}^\prime\) (aka. curvature) is also small. The approximate tangent is:</p>
+
+    \[p'_{d}(u) = p'(u) + h'(u) \hat{n}(u)\]
+
+    <p>Let us see how this plays out in practice.</p>
+
+
+    <ol>
+    <li> Use the exact and approximate formulas to write two expressions for the unit normal to the displaced curve for the following particular curve and displacement function:
+    \[p(u) = (\cos(2\pi u), \sin(2\pi u))\]
+    \[h(u) = A \cos(40\pi u) + B\]
+    </li>
+
+    <li> Make pictures of the results by plotting the curve over the interval \(u \in [0.2, 0.3]\), and plotting the surface normals as short lines at regular intervals. Compare the pictures of both the exact and approximate normals for \(A = 1/20, B = 0\) and for \(A = 1/20, B = 5\). For which of these cases is the approximation a good one, and why? We recommend using MATLAB or Matplotlib to generate the images.</li>
+    </ol>
+
+    <h4>2. Reflection and Cube Maps</h4>
+    <p>Imagine that we would like to render a sphere under environment lighting. The sphere is centered at (0, 0, 0) and its radius is 1. The shader that does this will look up into an environment texture, using the <strong>direction</strong> of the reflected ray to compute the texture coordinates.  Suppose we have decided to use a cube map to represent the environment map, and we are using the common convention of packing the 6 faces of that map into a single texture that has the cube “unfolded” into a cross shape with width 300 texels and height 400 texels.</p>
+    <p><div style="text-align: center">
+        <img src="images/a4/cubemap.png" alt="" height="320" width="280" style="margin: 20px">
+    </div>
+    <p>A perspective camera is positioned at (0, 0, 2), viewing at (0, 0, 0). The following figure (not to scale) is a slice of the scene through the y-z plane, showing several viewing rays.</p>
+    <p><div style="text-align: center">
+        <img src="images/a4/YZprojection.png" alt="" height="300" style="margin: 20px">
+    </div>
+    <p>Which parts of the cube map could be sampled by reflections from the sphere? Draw the region on the cross and mark your sketch with enough positions and dimensions (in texel units) so that it’s clear exactly what region is shaded. You can round your answer to the nearest integer texel unit. We are providing the following cube map diagram in <a href='images/a4/a4-written-2-answersheet.pdf'>PDF format</a>--mark it up either electronically or by printing and drawing on it.</p>
+    <p><div style="text-align: center">
+        <img src="images/a4/draw.png" alt="" height="320" width="280" style="margin: 20px">
+    </div>
+
+    <h4>What to Submit</h4>
+    <p>Submit a PDF file containing Q1 and Q2 together.
+
