@@ -68,15 +68,15 @@
     <h4>2. Reflection and Cube Maps</h4>
     <p>Imagine that we would like to render a sphere under environment lighting. The sphere is centered at (0, 0, 0) and its radius is 1. The shader that does this will look up into an environment texture, using the <strong>direction</strong> of the reflected ray to compute the texture coordinates.  Suppose we have decided to use a cube map to represent the environment map, and we are using the common convention of packing the 6 faces of that map into a single texture that has the cube “unfolded” into a cross shape with width 300 texels and height 400 texels.</p>
     <p><div style="text-align: center">
-        <img src="images/a4/cubemap.png" alt="" height="320" width="280">
+        <img src="images/a4/cubemap.png" alt="" height="320" width="280" style="margin: 20px">
     </div>
     <p>A perspective camera is positioned at (0, 0, 2), viewing at (0, 0, 0). The following figure (not to scale) is a slice of the scene through the y-z plane, showing several viewing rays.</p>
     <p><div style="text-align: center">
-        <img src="images/a4/YZprojection.png" alt="" height="300">
+        <img src="images/a4/YZprojection.png" alt="" height="300" style="margin: 20px">
     </div>
     <p>Which parts of the cube map could be sampled by reflections from the sphere? Draw the region on the cross and mark your sketch with enough positions and dimensions (in texel units) so that it’s clear exactly what region is shaded. You can round your answer to the nearest integer texel unit. We are providing the following cube map diagram in <a href='images/a4/a4-written-2-answersheet.pdf'>PDF format</a>--mark it up either electronically or by printing and drawing on it.</p>
     <p><div style="text-align: center">
-        <img src="images/a4/draw.png" alt="" height="320" width="280">
+        <img src="images/a4/draw.png" alt="" height="320" width="280" style="margin: 20px">
     </div>
 
     <h4>What to Submit</h4>
