@@ -68,15 +68,15 @@
     <h4>2. Reflection and Cube Maps</h4>
     <p>Imagine that we would like to render a sphere under environment lighting. The sphere is centered at (0, 0, 0) and its radius is 1. The shader that does this will look up into an environment texture, using the <strong>direction</strong> of the reflected ray to compute the texture coordinates.  Suppose we have decided to use a cube map to represent the environment map, and we are using the common convention of packing the 6 faces of that map into a single texture that has the cube “unfolded” into a cross shape with width 300 texels and height 400 texels.</p>
     <p><div style="text-align: center">
-        <img src="images/a4/cubemap.png" alt="" height="320" width="280" style="margin: 20px">
+        <img src="images/a4/cubemap.png" alt="" height="320" width="280">
     </div>
     <p>A perspective camera is positioned at (0, 0, 2), viewing at (0, 0, 0). The following figure (not to scale) is a slice of the scene through the y-z plane, showing several viewing rays.</p>
     <p><div style="text-align: center">
-        <img src="images/a4/YZprojection.png" alt="" height="300" style="margin: 20px">
+        <img src="images/a4/YZprojection.png" alt="" height="300">
     </div>
     <p>Which parts of the cube map could be sampled by reflections from the sphere? Draw the region on the cross and mark your sketch with enough positions and dimensions (in texel units) so that it’s clear exactly what region is shaded. You can round your answer to the nearest integer texel unit. We are providing the following cube map diagram in <a href='images/a4/a4-written-2-answersheet.pdf'>PDF format</a>--mark it up either electronically or by printing and drawing on it.</p>
     <p><div style="text-align: center">
-        <img src="images/a4/draw.png" alt="" height="320" width="280" style="margin: 20px">
+        <img src="images/a4/draw.png" alt="" height="320" width="280">
     </div>
 
     <h4>What to Submit</h4>
@@ -151,22 +151,24 @@ These computations should be repeated for each visible light in the scene and th
   </ul>
   </p>
 
-  <p>The three terms \(F\), \(D\), and \(G\) are the Fresnel factor, the slope distribution, and the shadowing/masking factor, and their particulars are given below.
-  
-  <p><tt>\(F(\omega_i,h)\)</tt>: This is the Fresnel term for unpolarized light, and only reflection (not refraction) is considered in this assignment.
+  <p>The three terms \(F\), \(D\), and \(G\) are the Fresnel factor, the slope distribution, and the shadowing/masking factor, and their particulars are given below. We have already implemented the three functions for you; the following is for reference.
+
+  <ul>
+  <li><tt>\(F(\omega_i,h)\)</tt>: This is the Fresnel term for unpolarized light, and only reflection (not refraction) is considered in this assignment.
   <ul style="list-style: none; text-align: center;">
     \[ F(\omega_i, h) \; = \; \frac{1}{2}\frac{(g-c)^2}{(g+c)^2}\left(1 \; + \; \frac{(c(g+c)-1)^2}{(c(g-c)+1)^2}\right)\]
   </ul>
   where \(g \; = \; \sqrt{\frac{n_t^2}{n_i^2}-1+c^2}\) and \(c \; = \; |\omega_i \cdot h|\). \(n_t\) and \(n_i\) are the refractive index of material and air respectively. \(n_i\;=\;1.0\). Note that when computing the value of \(g\), it is possible to encounter a neagive number under the square root in some edge cases.  In this case, \(F\;=\;1\).
-</p>
+  </li>
 
-  <p><tt>\(D(h)\)</tt>: This factor comes from the microfacet distribution function. We use the Beckmann distribution.
+  <li><tt>\(D(h)\)</tt>: This factor comes from the microfacet distribution function. We use the Beckmann distribution.
   <ul style="list-style: none; text-align: center;">
     \[ D(h) \; = \; \frac{\chi^{+}(h \cdot n)}{\pi\alpha_b^2\cos^4\theta_h} \; \exp\left(\frac{-\tan^2\theta_h}{\alpha_b^2}\right) \]
   </ul>
   where \(\theta_h\) denotes the angle between \(h\) and \(n\); \(\chi^{+}(a)\) is the positive characteristic function (one if \(a>0\) and zero if \(a \leq 0\) ). \(\alpha_b\) is the width parameter of the Beckmann distribution and can be controlled by the slider at the top.
+  </li>
 
-<p>
+  <li>
   <tt>\(G(\omega_i,\omega_o,h)\)</tt>: This is the Smith shadowing-masking term; it is designed based on the choice of microfacet distribution function \(D(h)\). For 
   the Beckmann model, we use a rational approximation calculated by Walter et al.  \(G(\omega_i, \omega_o,h)\) can be separated as the product of two parts:
   <ul style="list-style: none; text-align: center;">
@@ -183,14 +185,9 @@ These computations should be repeated for each visible light in the scene and th
      \]
   </ul>
   where \(a=(\alpha_b\tan\theta_v)^{-1}\) and \(\theta_v\) is the angle between \(v\) and \(n\).
-</p>
-
-
-
-
-
-
-
+</li>
+</ul>
+<p>Implement the shading equation in <tt>fragmentShader</tt> in <tt>microfacet.html</tt>. Use <tt>vertexShader</tt> to pass any data you will need to the fragment shader.</p>
 
 
 <h4>Problem 2: Environment Mapping</h4>
@@ -218,16 +215,20 @@ Similarly to a 2D texture, you can look up into a cube using the <tt>textureCube
 
 <p>Your task is to implement specular reflection under environment lighting. Given a viewing direction and a normal direction, we can follow the written part (i.e., Mirror Reflection) to compute the reflection direction, and then use it to sample the cube map. You may assume the environment map is fixed in eye space; i.e. the mouse rotates the scene relative to the environment map, but the environment map remains fixed relative to the camera. Implement the <tt>vertexShader</tt> and <tt>fragmentShader</tt> in <tt>environment.html</tt>.
 
-<p>NOTE: Some browsers may not load the environment map properly due to security restrictions. If this happens, there are workarounds, but it is probably easiest to simply try a different browser.
-
-
-
+<p>
+Given the way this problem loads textures, you will likely need to run a server due to security restrictions. An easy way to do this is to install <a href=https://www.python.org>Python</a> if you do not already have it and run from your project directory the following command that corresponds to your Python version:
+<ul>
+<li>Python 2: <tt>python -m SimpleHTTPServer 8000</tt></li>
+<li>Python 3: <tt>python -m http.server 8000</tt></li>
+</ul>
+Once the server is running, visit <a href=http://localhost:8000/environment.html><tt>http://localhost:8000/environment.html</tt></a>.
+</p>
 
 <h4>Problem 3: Displacement mapping</h4>
 
 <div class="thumbnails" style="text-align: center">
-    <img src="images/a4/displacement_reference_square.jpg" alt="">
     <img src="images/a4/displacement_reference_earth.jpg" alt="">
+    <img src="images/a4/displacement_reference_square.jpg" alt="">
 </div>
 
 <p>Building complex shapes in 3D is hard work, but one easy-to-use modeling tool that is good for adding detail to a smooth surface is displacement mapping.  The idea is to use a height function \(h(u,v)\) whose graph is a height field that shows the details you'd like, store it in an image, use texture coordinates to establish \((u,v)\) coordinates on the surface, and then displace each point of the surface along the surface normal at that point according to the height function.</p>
@@ -280,15 +281,12 @@ Similarly to a 2D texture, you can look up into a cube using the <tt>textureCube
 
 
 
-<p>You can test your implementation on these sets of models and height maps:</p>
+<p>You can test your implementation on this model and height map:</p>
 <ul>
-<li>A two-dimensional sine wave: mesh: <tt>data/meshes/square.obj</tt>; texture: none; displacement map: <tt>data/textures/sinbump1k.png</tt></li>
-<li>A map of the Earth: mesh: <tt>data/meshes/sphere_highres.obj</tt>; texture: <tt>data/textures/earthmap1k.jpg</tt>; displacement map: <tt>data/textures/earthbump1k.jpg</tt></li>
+<li>Higher-resolution map of the Earth: mesh: <tt>data/meshes/sphere_highres.obj</tt>; texture: <tt>data/textures/earthmap1k.jpg</tt>; displacement map: <tt>data/textures/earthbump1k.jpg</tt>
+<li>Sine wave: mesh: <tt>data/meshes/square.obj</tt>; texture: none; displacement map: <tt>data/textures/sinbump1k.jpg</tt></li>
 </ul>
 
-<!--
-<p>The sine wave mesh can help you determine if you are calculating the displaced positions correctly. We are providing a mesh with the actual positions and normals already calculated. You can load it with: mesh: <tt>data/meshes/square_displaced_reference.obj</tt>; texture: none; displacement map: none. It corresponds to a maximum displacement scale on the slider.</p>
--->
 
 <h4>Problem 4: Bump mapping</h4>
 
@@ -304,6 +302,6 @@ Similarly to a 2D texture, you can look up into a cube using the <tt>textureCube
 
 <p>You can test your implementation on these sets of models and height maps:</p>
 <ul>
-<li>A map of the Earth: mesh: <tt>data/meshes/sphere_highres.obj</tt>; texture: <tt>data/textures/earthmap1k.jpg</tt>; displacement map: <tt>data/textures/earthbump1k.jpg</tt>
-<li>A lower-resolution map of the Earth: mesh: <tt>data/meshes/sphere.obj</tt>; texture: <tt>data/textures/earthmap1k.jpg</tt>; displacement map: <tt>data/textures/earthbump1k.jpg</tt></li>
+<li>Higher-resolution map of the Earth: mesh: <tt>data/meshes/sphere_highres.obj</tt>; texture: <tt>data/textures/earthmap1k.jpg</tt>; displacement map: <tt>data/textures/earthbump1k.jpg</tt>
+<li>Lower-resolution map of the Earth: mesh: <tt>data/meshes/sphere.obj</tt>; texture: <tt>data/textures/earthmap1k.jpg</tt>; displacement map: <tt>data/textures/earthbump1k.jpg</tt></li>
 </ul>
