@@ -60,6 +60,9 @@ gl.uniform3fv(gl.getUniformLocation(program, "color"), shape.lineColor);
 // ... draw the lines ...
 </code></pre>
     </ul>
+
+<h2>Exercise</h2>
+    <p> The cat has a bow for its head that is commented out in the Javascript.  Put the bow in and generalize the program so that it can draw the bow filled in red.  Also give the nose and eyes better colors.</p>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -153,7 +156,8 @@ gl.uniform3fv(gl.getUniformLocation(program, "color"), shape.lineColor);
             //38, 39, 39, 40, 40, 41, 41, 42, 42, 43, 43, 44, 44, 45, 45, 46, 46, 38  // bow
         ],
         triInd: [
-            0,1,2, 0,2,3, 0,3,4, 8,6,7, 8,5,6, 8,4,5, 4,8,0,
+            0,1,2, 0,2,3, 0,3,4, 8,6,7, 8,5,6, 8,4,5, 4,8,0, // head
+            //30, 31, 32, 33, 30, 32, // nose
         ],
         lineColor: [0.2, 0.2, 0.2],
         fillColor: [1.0, 0.9, 0.7]
