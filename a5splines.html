@@ -4,32 +4,18 @@
 </script>
 
 <h4>Introduction</h4>
-<p>On past assignments we have created straight lines and spheres. However, the question remains: how are we supposed to model chess pieces? Or vases? Curvy letters such as "s" in typography? The answer: splines! In the most general sense, splines are piecewise polynomial functions that specify potentially complex curves mathematically. In this assignment, you'll get a chance to play around with some splines, and ultimately create some really neat objects to add to your scenes.</p>
+<p>On past assignments we have created straight lines and spheres. However, the question remains: how are we supposed to model chess pieces? Or vases? Curvy letters such as the "g" in "typography?" The answer: splines! In the most general sense, splines are piecewise polynomial functions that specify potentially complex curves mathematically. In this assignment, you'll get a chance to play around with some splines, and ultimately create some really neat objects to add to your scenes.</p>
 
-<p>In this assignment, you will explore representing a Catmull-Rom Spline curve with several cubic Bézier by completing some warm-up exercises, implementing De Casteljau's algorithm, and rotating an arbitrary 2D spline in 3D space to create a surface of revolution. Again, we will provide framework code, so your focus is on implementing the more "interesting," graphics-related components. However, you also have some freedom to redesign our system as you see fit.</p>
-
+<p>In this assignment, you will explore Catmull-Rom splines and cubic Bézier segments by completing some warm-up exercises, implementing De Csasteljau's algorithm, and rotating an arbitrary 2D spline in 3D space to create a surface of revolution. Again, we will provide framework code, so your focus is on implementing the more "interesting," graphics-related components. However, you also have some freedom to redesign our system as you see fit.</p>
 
 
 <h3>Written Part</h3>
-<p class="duedate">Due:  Monday March 26th 2018 (11:59pm)</p>
+<p class="duedate">Due:  Monday October 29 2018 (11:59pm)</p>
 <p><strong>Do this part alone or in groups of two, as you prefer.</strong>
 
-<h4>1. deCasteljau</h4>
-
-<p>The deCastlejau algorithm splits a B&eacute;zier curve <b>B</b> into two curves: <b>L</b> 
-and <b>R</b>. This means that it takes a sequence of four control points \((\mathbf{p}_0, \mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_3)\), which define the curve <b>B</b>, and produces two sets of four points \((\mathbf{p}^L_0, \mathbf{p}^L_1, \mathbf{p}^L_2, \mathbf{p}^L_3)\) and \((\mathbf{p}^R_0, \mathbf{p}^R_1, \mathbf{p}^R_2, \mathbf{p}^R_3)\), which define the curves <b>L</b> and <b>R</b>.  The relationship between <b>L</b> and <b>B</b> is that <b>L</b>\((t)\) is the same as <b>B</b>\((t/2)\).  In this problem we'll prove that this is the case.
-
-<p>a) Given the four points \(\mathbf{p}_0, \ldots, \mathbf{p}_3\), use de Casteljau's algorithm to work out algebraic expressions for the four points \(\mathbf{p}^L_0, \ldots, \mathbf{p}^L_3\).
-
-<p>b) Write an expression for <b>L</b>\((t)\) in terms of \(\mathbf{p}_0, \ldots, \mathbf{p}_3\).
-
-<p>c) Write an expression for <b>B</b>\((t/2)\) in terms of \(\mathbf{p}_0, \ldots, \mathbf{p}_3\).  Show that it is the same as the answer to (b), which means that <b>L</b> covers the left half of <b>B</b>.
-
-<p>You could do the same thing to show that <b>R</b>\((t)\) = <b>B</b>\(((t+1)/2)\), but it would be much the same.
 
 
-
-<h4>2. Extending Modified B&eacute;ziers with Quintic Polynomials</h4>
+<h4>1. Quintic Modified B&eacute;ziers</h4>
 
 <h5>a) B&eacute;ziers</h5>
 
@@ -39,32 +25,28 @@ to control and cubics are generally sufficient for the human visual system – h
 hardly distinguish between <i>C<sup>2</sup></i> continuity and higher levels of continuity.
 
 <ol>
-    <li>If we are representing a curve segment as a polynomial of degree n, how many
-control points do we need to specify?</li>
+    <li>If we are representing a curve segment as a polynomial of degree \(n\), how many control points do we need to specify?</li>
     
     <li>We have a quintic B&eacute;zier (degree 5). How many control points do we need?</li>
 
-    <li>What is the minimum number of control points needed to model a parabola-shaped
-spline?</li>
+    <li>Consider the cubic B&eacute;zier segment defined by the points at the corners of a 2-unit square: \((-1, -1)\), \((-1, 1)\), \((1, 1)\), and \((1, -1)\).  Use de Casteljau's algorithm (presented in class or in section 15.6 of the textbook) to divide this curve at its midpoint into two segments.  
+        <ol><li>What are the control points of the two sub-segments?
+            <li>Verify that evaluating the left segment at \(t=0.5\) produces the same point as evaluating the original segment at \(t=0.25\).
+            <li>Verify that evaluating the right segment at \(t=0.5\) produces the same point as evaluating the original segment at \(t=0.75\).
+        </ol>
+    Two ways to do these evaluations are using the matrix form of the spline or following de Casteljau's algorithm.
 </ol>
 
 <h5>b) B&eacute;zier Modifications</h5>
 <p>
-In this question we want to add additional control by upgrading our Bezier with the
-addition of certain properties. Specifically, we would like to modify our spline so that, in
-addition to having control over \(f(0), f(1), f'(0),\) and \(f'(1)\), we'd now add control over
-\(f(\frac{1}{2})\) and \(f'(\frac{1}{2})\). 
-<!--\(f(\frac{1}{2})\). -->
-<!--\(f'(\frac{1}{2})\). -->
+As an alternative to splitting into more segments, another way to add control to a spline segment is to increase its degree.  The B&eacute;zier spline family provides one way to do this, but in this question we want to explore an alternative. The cubic B&eacute;zier provides fairly direct control over the endpoints \(f(0)\) and \(f(1)\) and the endpoint tangents \(f'(0)\) and \(f'(1)\).  We want to increase the degree to 5, and use the additional freedom that we gain to add control over the midpoint \(f(\frac{1}{2})\) and the midpoint tangent \(f'(\frac{1}{2})\). 
 </p>
 
 <p>
-To do this, assume we specify an additional control points \(p_4\) and \(p_5\). 
-<!-- To do this, assume we specify additional control point \(p_4\). -->
-<!--Similar to how \(f'(0)\) is proportional to 
-\((p_1 − p_0)\) in our original derivation, \(f'(\frac{1}{2})\) is proportional to \((p_3 - p_1)\). -->
-<!--Similar to how the endpoints \(f(0)\) and \(f(1)\) in the original formulation match the control points \(p_0\) and \(p_3\), in this new spline the midpoint \(f(\frac{1}{2})\) matches the control point \(p_2\).-->
-Similar to how the positions and derivatives at the endpoints in the original formulation are defined by the control points and their differences, the position and derivative at the midpoint in our new spline are controlled by the center two control points.  Specifically, the midpoint position \(f(\frac{1}{2})\) is the average of \(p_2\) and \(p_3\), and the derivative \(f'(\frac{1}{2})\) is proportional to the difference \(p_3 - p_2\).
+A quintic spline has 6 control points \(p_0, \ldots, p_5\). 
+In the cubic B&eacute;zier, the positions at the endpoints are defined by the first and last control points, and the derivatives at the endpoints are defined by differences of the first two and last two points.  Continuing in the same vein, the position and derivative at the midpoint in our new spline are controlled by the center two control points.  Specifically, the midpoint position \(f(\frac{1}{2})\) is the average of \(p_2\) and \(p_3\), and the derivative \(f'(\frac{1}{2})\) is proportional to the difference \(p_3 - p_2\).
+
+<p>
 Overall, the constraints are
 \[ f(0) = p_0 \]
 \[ f(1) = p_5 \]
@@ -73,36 +55,28 @@ Overall, the constraints are
 \[ f(\frac{1}{2}) = (p_2 + p_3) / 2 \]
 \[ f'(\frac{1}{2}) = 4(p_3 - p_2) \]
 And the degree of the spline is 5. 
-<!--Define \(p4\) such
-that \(f''(0)\) is proportional to \((p_4 − p_0)\) similar to how \(f'(0)\) is proportional to 
-\((p_1 − p_0)\) in our original derivation. In the original derivation of B&eacute;ziers, we assumed a 
-proportionality constant of 3 for convenience. Similarly, let the proportionality constant associated
-with \((p_4 − p_0)\) be 4 – that is, \(f''(0) = 4(p_4 - p_0)\). Similarly, we want \(f''(1) = 4(p_5 - p_3)\).
--->
 </p>
 
-<ol>
-    <li>Give a matrix \(A\) such that this new type of curve can be expressed as \(f(u) = uAP\) where
-    \(u\) is a vector of \([1, u, u^2, u^3, u^4, u^5]\) and \(P\) is a 6 by 2 matrix where rows correspond
-    to control points.</li>
-</ol>
+<p>Your job for this part: 
+    Give a matrix \(A\) such that this new type of curve can be expressed as \(f(t) = T(t)AP\) where
+    \(T(t)\) is the vector \([t^5, t^4, t^3, t^2, t, 1]\) and \(P\) is a 6 by 2 matrix with the control point coordinates in its rows.
+</p>
 
 
 <h5>c) Basis functions</h5>
-Plot the blending (basis) functions of this curve from \(u = 0\) to \(u = 1\) and include your
-plot in your response.
+Plot the blending (basis) functions of this curve from \(t = 0\) to \(t = 1\) and include your plot in your response.
 
 
 
 
-<h4>3. Catmull-Rom Splines</h4>
+<h4>2. Catmull-Rom to B&eacute;zier</h4>
 
 The Catmull-Rom spline is a cubic spline with with <i>C<sup>1</sup></i>
 continuity and control points that <b>lie directly on the spline</b>. Given a vector of control points, 
 \(P_{CR}\), the Catmull-Rom spline, as presented in lecture, satisfies the matrix equation:
 
 \[
-f_{CR}(u) = [u^3, u^2, u, 1]M_{CR}P_{CR}
+f_{CR}(t) = [t^3, t^2, t, 1]M_{CR}P_{CR}
 \]
 
 The matrix \(M_{CR}\) can be computed by multiplying the two matrices in the slides, leading to the result:
@@ -120,40 +94,38 @@ M_{CR} =
 \]
 
 
+
+A B&eacute;zier spline segment has the following form:
+
+\[
+    f_{Bez}(t) = [t^3, t^2, t, 1] M_{Bez}P_{Bez}
+\]
+\[
+    \text{where }
+    M_{Bez} = \begin{pmatrix}
+    -1 & 3 & -3 & 1 \\
+    3 & -6 & 3 & 0 \\
+    -3 & 3 & 0 & 0 \\
+    1 & 0 & 0 & 0 \\
+    \end{pmatrix}
+\]
+
+Converting a set of Catmull-Rom control points to a set of B&eacute;zier control points (which 
+define exactly the same curve) is the same thing as solving for the matrix \(M\) such
+that
+
+\[
+    \text{if }
+    P_{Bez} = MP_{CR}
+\]
+\[
+    \text{then }
+    f_{Bez}(u) = f_{CR}(u) \text{ for all } u
+\]
+
 <ol>
-    <li>
-        <b>Catmull-Rom to B&eacute;zier</b> <br/>
-
-        A B&eacute;zier spline segment has the following form:
-
-        \[
-            f_{Bez}(u) = [u^3, u^2, u, 1] M_{Bez}P_{Bez}
-        \]
-        \[
-            \text{where }
-            M_{Bez} = \begin{pmatrix}
-            -1 & 3 & -3 & 1 \\
-            3 & -6 & 3 & 0 \\
-            -3 & 3 & 0 & 0 \\
-            1 & 0 & 0 & 0 \\
-            \end{pmatrix}
-        \]
-
-        Converting a set of Catmull-Rom control points to a set of B&eacute;zier control points (which 
-        you can use to approximate the curve) is the same thing as solving for the matrix \(M\) such
-        that
-
-        \[
-            \text{if }
-            P_{Bez} = MP_{CR}
-        \]
-        \[
-            \text{then }
-            f_{Bez}(u) = f_{CR}(u) \text{ for all } u
-        \]
-
-    Compute \(M\) with \(\tau = 0.5\).
-
+    <li>What is the matrix \(M\) that will convert Catmull-Rom control points 
+        to B&eacute;zier control points?
     </li>
     <li>
         Convert the 4 Catmull-Rom control points below into B&eacute;zier control points.  That is, give the control points for the B&eacute;zier segment that is equivalent to the segment of the Catmull-Rom spline between \(p_1\) and \(p_2\).
@@ -168,8 +140,11 @@ M_{CR} =
 </ol>
 
 
+
+<!--
+
 <h3>Programming Part</h3>
-<p class="duedate">Due:  Friday March 30th 2018 (11:59pm)</p>
+<p class="duedate">Due:  Friday November 2 2018 (11:59pm)</p>
 <p><strong>Do this programming part alone or in groups of two, as you prefer.</strong>
 
 <h4>Getting Started</h4>
@@ -204,7 +179,6 @@ If you run <tt>splines.RevolutionApp</tt> with a fresh pull from the repo, you s
     <img src="images/a5/A56.png" />
     <img src="images/a5/A53.png" />
     <img src="images/a5/A52.png" />
-    <!--<img src="images/a5/A57.png" />-->
 </div>
 
 See the faces in the last image?
@@ -304,3 +278,4 @@ sure you have the algorithm right.</p>
     <li> Your(zipped) src folder</li>
     <li> An image of an interesting surface of revolution that you create!</li>
 </ol>
+-->
