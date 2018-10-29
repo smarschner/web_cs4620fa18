@@ -175,15 +175,6 @@ if ($("#blurYCheckBox").is(":checked")) {
         gl.flush();
     });
 }
-if ($("#srgbCheckBox").is(":checked")) {
-    drawToBufferAndSwap(gl, fbo, buffer, function() {
-        gl.useProgram(srgbProgram);
-        // Code elided for brevity.
-        drawFullScreenQuad(gl, srgbProgram);
-        gl.useProgram(null);
-        gl.flush();
-    });
-}
 
 // Copy pixel from read buffer to the monitor.
 {
@@ -198,6 +189,9 @@ if ($("#srgbCheckBox").is(":checked")) {
 </pre>
         </li>
     </ul>
+<h2>Exercise</h2>
+<p> Currently the "Convert to sRGB" checkbox is not functioning. Can you enable sRGB conversion by adding a pass in the post process? The shader for sRGB conversion is already there. </p>
+
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -502,9 +496,6 @@ if ($("#srgbCheckBox").is(":checked")) {
     blurYProgram.textureWidth = gl.getUniformLocation(blurYProgram, "textureWidth");
     blurYProgram.textureHeight = gl.getUniformLocation(blurYProgram, "textureHeight");
 
-    // sRGB program
-    var srgbProgram = createGlslProgram(gl, "vertexTexCoordVs", "srgbFs");
-    srgbProgram.texture = gl.getUniformLocation(srgbProgram, "texture");
 
     function drawFullScreenQuad(gl, program) {
         var shape = fullScreenQuad;
@@ -652,19 +643,6 @@ if ($("#srgbCheckBox").is(":checked")) {
                     gl.uniform1f(blurYProgram.textureHeight, 512.0);
                 }
                 drawFullScreenQuad(gl, blurYProgram);
-                gl.useProgram(null);
-                gl.flush();
-            });
-        }
-        if ($("#srgbCheckBox").is(":checked")) {
-            drawToBufferAndSwap(gl, fbo, buffer, function() {
-                gl.useProgram(srgbProgram);
-                if (srgbProgram.texture != null) {
-                    gl.activeTexture(gl.TEXTURE0);
-                    gl.bindTexture(gl.TEXTURE_2D, buffer.getReadBuffer());
-                    gl.uniform1i(srgbProgram.texture, 0);
-                }
-                drawFullScreenQuad(gl, srgbProgram);
                 gl.useProgram(null);
                 gl.flush();
             });
