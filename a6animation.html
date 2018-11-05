@@ -62,11 +62,10 @@ In your computations you might like to use the <tt>egl.math.Quat</tt> class to c
         <li> Removing a keyframe: Navigate to a keyframe and press the <tt>m</tt> key to remove.</li>
         <li> Playing and pausing the animation: The <tt>space bar</tt> is used to play or pause the animation.</li>
         <li> Changing the method of rotation: The <tt>/</tt> key is used to alternate between three methods of rotation.</li>
-        <li> Manipulator: Click on a object with right mouse button to reveal its manipulators. Use <tt>T</tt> <tt>R</tt> <tt>S</tt> keys to switch between translation, rotation and scaling manipulators. Drag on the manipulator with your right mouse button to transform the object.
-        <li> Rotate camera: Hold your left mouse button and drag.
+        <li> Manipulator: Right click on a object to reveal its manipulators. Press <tt>T</tt> <tt>R</tt> <tt>S</tt> to switch between translation, rotation and scaling manipulators. Drag on the manipulator with right mouse button to transform the object.
+        <li> Camera pan and tilt: Left click and drag.
         <li> Save scene to file: Press F4 to save current scene (excluding timeline) to <tt>data/scenes/Saved.xml</tt>.
-
-    </ul>  
+    </ul>
 
     <h4>Keyframes</h4>
 
@@ -178,6 +177,8 @@ In your computations you might like to use the <tt>egl.math.Quat</tt> class to c
     <h4>Interpolation Modes</h4>
     Our framework supports three different interpolation modes: Euler angles, Linear interpolation of quaternions, and spherical linear interpolation of quaternions. You will need to support all three of these in the function <tt>AnimationTimeline.updateTransformation</tt>. The mode currently selected is indicated by the argument <tt>rotation</tt>. We have described the latter two modes in detail above. In order to implement Euler angles, you will need to decompose the rotation matrices into Euler angles (using a function we have provided), linearly interpolate, and then recompose into a rotation matrix (you will find useful Matrix3 functions for this).
 
+    <h3>Build Your Transform Hierarchy Wisely</h3>
+    When you change the parent of an object, the inherited base transformation will also change. This may sometimes lead to unexpected consequences if the transform hierachy is designed poorly. Try changing the parent of the Teapot in <tt>Table.xml</tt> and see what happens. <tt>Table2.xml</tt> models exactly the same scene but with a better transform hierachy.
 
     <h3>Demo Video</h3>
     This short video shows what to expect after correctly completing the coding portion of the assignment.
@@ -185,7 +186,7 @@ In your computations you might like to use the <tt>egl.math.Quat</tt> class to c
     <iframe width="560" height="315" src="https://www.youtube.com/embed/xgJbMma4-FM" frameborder="0" allowfullscreen></iframe>
 
 
-    <h3>What to Submit </h3>
+    <h3>What to Submit</h3>
 
     Submit a zip file containing:
     <ol>
