@@ -117,6 +117,7 @@ table.sched td.ref { color: #888 }
 table.sched tr.dis { color: #888 }
 table.sched tr.dis td.ref { color: #fff }
 table.sched tr.dis td.ref a.dis { color: #fff }
+table.sched tr.dis td.projdue { color: #000 }
 table.sched tr.header {
   color: white;
   background-color: #888;

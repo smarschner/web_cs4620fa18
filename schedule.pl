@@ -264,7 +264,16 @@ while ($month < $cfg{'end_month'} || $day < $cfg{'end_day'}) {
 	print "  <td class=day>$day</td><td class=month>$months[$month]</td>",$cr;
 	print "  <td>&mdash;$holiday&mdash;</td>",$cr;
 	print "  <td>&nbsp;</td>";
-	print "  <td class=projdue>&nbsp;</td>";
+	my $extra = &do_homeworks($prevm, $prevd, $month, $day);
+	my $special = &check_special($month, $day);
+	if ($special ne '') {
+	    $extra .= ' <span class=special_date>(' . $special . ')</span>';
+	}
+	if ($extra eq '') {
+	    print "  <td class=projdue>&nbsp;</td>$cr";
+	} else {
+	    print "  <td class=projdue>$extra</td>$cr";
+	}
 	print "</tr>", $cr;
 	$ni++;
     } else {
@@ -301,7 +310,7 @@ while ($month < $cfg{'end_month'} || $day < $cfg{'end_day'}) {
 	    $reading =~ s/-/\&ndash;/;
 	}
 	print "  <td>$reading</td>",$cr;
-	my $extra = &do_homeworks($prevmm, $prevmd, $month, $day);
+	my $extra = &do_homeworks($prevm, $prevd, $month, $day);
 	my $special = &check_special($month, $day);
 	if ($special ne '') {
 	    $extra .= ' <span class=special_date>(' . $special . ')</span>';
@@ -309,7 +318,7 @@ while ($month < $cfg{'end_month'} || $day < $cfg{'end_day'}) {
 	if ($extra eq '') {
 	    print "  <td class=projdue>&nbsp;</td>$cr";
 	} else {
-	    print "  <td class=projdue>$extra</td>$cr";
+	    print "  <td class=projdue class=nodis>$extra</td>$cr";
 	}
 	print "</tr>$cr";
 	$mi++;
